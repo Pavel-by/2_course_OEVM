@@ -1,0 +1,100 @@
+Microsoft (R) Macro Assembler Version 5.10                  9/12/19 11:01:31
+                                                             Page     1-1
+
+
+				
+				
+				   DOSSEG                                      
+				; Задание сегментов под ДО
+				С
+				   .MODEL  SMALL                               
+				; Модель памяти-SMALL(Малая)
+				   .STACK  100h                                
+				; Отвести под Стек 256 байт
+				   .DATA                                       
+				; Начало сегмента данных
+ 0000				Greeting  LABEL  BYTE                          
+				; Текст  приветствия
+ 0000  48 65 6C 6C 6F 20	   DB 'Hello from st.gr.8382 - Mironchik P.D.',
+				13,10,'$'
+       66 72 6F 6D 20 73	
+       74 2E 67 72 2E 38	
+       33 38 32 20 2D 20	
+       4D 69 72 6F 6E 63	
+       68 69 6B 20 50 2E	
+       44 2E 0D 0A 24		
+ 0029				SecondGreeting LABEL BYTE
+ 0029  54 68 69 73 20 69		DB 'This is second greeting',13,10,'$'
+       73 20 73 65 63 6F	
+       6E 64 20 67 72 65	
+       65 74 69 6E 67 0D	
+       0A 24			
+				  
+				   .CODE                                ; На�
+				�ало сегмента кода
+ 0000  B8 ---- R		   mov  ax,@data                        ; За�
+				�рузка в DS адреса начала
+ 0003  8E D8			   mov  ds,ax                           ; се�
+				�мента данных
+ 0005  BA 0000 R		   mov  dx,OFFSET Greeting              ; За�
+				�рузка в dx смещения
+				                                        ; ад�
+				�еса текста приветствия
+ 0008  B4 09			   mov  ah,9                            ; # ф�
+				�нкции ДОС печати строки
+ 000A  CD 21			   int  21h                             ; вы�
+				�од на экран  приветствия
+				   
+ 000C  BA 0029 R		   mov  dx,OFFSET SecondGreeting        ; За�
+				�рузка в dx смещения
+ 000F  CD 21			   int  21h                             ; вы�
+				�од на экран  приветствия
+ 0011  B4 4C			   mov  ah,4ch                          ; # ф�
+				�нкции ДОС завершения про�
+				�раммы
+ 0013  CD 21			   int  21h                             ; за�
+				�ершение программы и выхо�
+				� в ДОС
+				   
+Microsoft (R) Macro Assembler Version 5.10                  9/12/19 11:01:31
+                                                             Page     1-2
+
+
+				   END
+Microsoft (R) Macro Assembler Version 5.10                  9/12/19 11:01:31
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	0043	WORD	PUBLIC	'DATA'
+  STACK  . . . . . . . . . . . .  	0100	PARA	STACK	'STACK'
+_TEXT  . . . . . . . . . . . . .  	0015	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+GREETING . . . . . . . . . . . .  	L BYTE	0000	_DATA
+
+SECONDGREETING . . . . . . . . .  	L BYTE	0029	_DATA
+
+@CODE  . . . . . . . . . . . . .  	TEXT  _TEXT		
+@CODESIZE  . . . . . . . . . . .  	TEXT  0		
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@DATASIZE  . . . . . . . . . . .  	TEXT  0		
+@FILENAME  . . . . . . . . . . .  	TEXT  hello1_2		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     25 Source  Lines
+     25 Total   Lines
+     19 Symbols
+
+  47980 + 461327 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
